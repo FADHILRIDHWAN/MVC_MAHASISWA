@@ -1,52 +1,39 @@
-<!DOCTYPE html>
-<html>
+<h2 class="mb-3">
+    Data Mahasiswa
+</h2>
 
-<head>
+<?php $this->flash(); ?>
 
-    <title>Data Mahasiswa</title>
+<a
+    href="<?= BASEURL ?>/mahasiswa/create"
+    class="btn btn-primary mb-3">
 
-    <style>
-        table {
+    Tambah Mahasiswa
 
-            border-collapse: collapse;
-            width: 100%;
+</a>
 
-        }
 
-        th,
-        td {
+<form method="GET" class="row mb-4">
 
-            padding: 10px;
-            border: 1px solid black;
-            text-align: center;
-
-        }
-
-        th {
-
-            background: #ddd;
-
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <h2>Data Mahasiswa</h2>
-
-    <form method="GET">
+    <div class="col-md-4">
 
         <input
             type="text"
             name="search"
+            class="form-control"
 
             placeholder="Cari NPM / Nama"
 
             value="<?= isset($search) ? $search : '' ?>">
 
+    </div>
 
-        <select name="jurusan">
+
+    <div class="col-md-4">
+
+        <select
+            name="jurusan"
+            class="form-select">
 
             <option value="">
                 Semua Jurusan
@@ -88,110 +75,150 @@
 
         </select>
 
+    </div>
 
-        <button type="submit">
+
+    <div class="col-md-4">
+
+        <button
+            type="submit"
+            class="btn btn-success">
 
             Cari
 
         </button>
 
+        <a
+            href="<?= BASEURL ?>/mahasiswa"
+            class="btn btn-secondary">
 
-        <a href="<?= BASEURL ?>/mahasiswa">
-
-            <button type="button">
-
-                Reset
-
-            </button>
+            Reset
 
         </a>
 
-    </form>
+    </div>
 
-    <br>
-    <a href="<?= BASEURL ?>/mahasiswa/create">
-
-        <button>
-            Tambah Mahasiswa
-        </button>
-
-    </a>
-
-    <?php $this->flash(); ?>
-
-    <table>
-
-        <tr>
-
-            <th>No</th>
-            <th>NPM</th>
-            <th>Nama Lengkap</th>
-            <th>Fakultas</th>
-            <th>Jurusan</th>
-            <th>Tempat Lahir</th>
-            <th>Tanggal Lahir</th>
-            <th>Jenis Kelamin</th>
-            <th>Status</th>
-            <th>Aksi</th>
-
-        </tr>
-
-        <?php if (!empty($mahasiswa)): ?>
-
-            <?php
-            $no = 1;
-            foreach ($mahasiswa as $m):
-            ?>
-
-                <tr>
-
-                    <td><?= $no++ ?></td>
-                    <td><?= $m['npm'] ?></td>
-                    <td><?= $m['nama_lengkap'] ?></td>
-                    <td><?= $m['fakultas'] ?></td>
-                    <td><?= $m['jurusan'] ?></td>
-                    <td><?= $m['tempat_lahir'] ?></td>
-                    <td><?= date('d-m-Y', strtotime($m['tanggal_lahir'])) ?></td>
-                    <td><?= $m['jenis_kelamin'] ?></td>
-                    <td><?= ($m['status_id'] == 1) ? 'Aktif' : 'Nonaktif' ?></td>
-                    <td>
-
-                        <a href="<?= BASEURL ?>/mahasiswa/edit/<?= $m['id'] ?>">
-
-                            <button>Edit</button>
-
-                        </a>
+</form>
 
 
-                        <a
-                            href="<?= BASEURL ?>/mahasiswa/delete/<?= $m['id'] ?>"
 
-                            onclick="return confirm(
+<div class="table-responsive">
+
+    <table
+        class="table table-striped table-bordered">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>No</th>
+                <th>NPM</th>
+                <th>Nama</th>
+                <th>Fakultas</th>
+                <th>Jurusan</th>
+                <th>Tempat Lahir</th>
+                <th>Tanggal Lahir</th>
+                <th>Jenis Kelamin</th>
+                <th>Status</th>
+                <th>Aksi</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <?php if (!empty($mahasiswa)): ?>
+
+                <?php
+                $no = 1;
+                foreach ($mahasiswa as $m):
+                ?>
+
+                    <tr>
+
+                        <td><?= $no++ ?></td>
+
+                        <td><?= $m['npm'] ?></td>
+
+                        <td><?= $m['nama_lengkap'] ?></td>
+
+                        <td><?= $m['fakultas'] ?></td>
+
+                        <td><?= $m['jurusan'] ?></td>
+
+                        <td><?= $m['tempat_lahir'] ?></td>
+
+                        <td>
+
+                            <?= date(
+                                'd-m-Y',
+                                strtotime($m['tanggal_lahir'])
+                            )
+                            ?>
+
+                        </td>
+
+                        <td><?= $m['jenis_kelamin'] ?></td>
+
+                        <td>
+
+                            <?= ($m['status_id'] == 1)
+                                ?
+                                'Aktif'
+                                :
+                                'Nonaktif'
+                            ?>
+
+                        </td>
+
+                        <td>
+
+                            <a
+                                href="<?= BASEURL ?>/mahasiswa/edit/<?= $m['id'] ?>"
+                                class="btn btn-warning btn-sm">
+
+                                Edit
+
+                            </a>
+
+
+                            <a
+                                href="<?= BASEURL ?>/mahasiswa/delete/<?= $m['id'] ?>"
+
+                                class="btn btn-danger btn-sm"
+
+                                onclick="return confirm(
 'Yakin ingin menghapus data?'
 )">
 
-                            <button>Delete</button>
+                                Delete
 
-                        </a>
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                <?php endforeach; ?>
+
+            <?php else: ?>
+
+                <tr>
+
+                    <td colspan="10"
+                        class="text-center">
+
+                        Data tidak ditemukan
 
                     </td>
 
                 </tr>
 
-            <?php endforeach; ?>
+            <?php endif; ?>
 
-        <?php else: ?>
-
-            <tr>
-                <td colspan="9">
-                    Data mahasiswa belum ada
-                </td>
-            </tr>
-
-        <?php endif; ?>
+        </tbody>
 
     </table>
 
-</body>
-
-</html>
+</div>

@@ -8,7 +8,17 @@ class Controller
 
         extract($data);
 
+        ob_start();
+
         require_once '../app/views/' . $view . '.php';
+
+        $content = ob_get_clean();
+
+        require_once '../app/views/layouts/header.php';
+
+        echo $content;
+
+        require_once '../app/views/layouts/footer.php';
     }
 
     public function model($model)
@@ -33,9 +43,9 @@ class Controller
 
         if (isset($_SESSION['flash'])) {
 
-            echo "<div style='padding:10px;
-            margin:10px 0;
-            background:#ddd'>";
+            echo "<div class='alert alert-" .
+                $_SESSION['flash']['type'] .
+                "'>";
 
             echo $_SESSION['flash']['message'];
 

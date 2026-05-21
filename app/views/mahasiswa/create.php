@@ -1,94 +1,189 @@
-<!DOCTYPE html>
+<h2 class="mb-4">
 
-<html>
+    Tambah Mahasiswa
 
-<head>
+</h2>
 
-    <title>Tambah Mahasiswa</title>
+<?php $this->flash(); ?>
 
-    <style>
-        input,
-        select {
+<form
+    action="<?= BASEURL ?>/mahasiswa/store"
+    method="POST">
 
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
+    <div class="mb-3">
 
-        }
-    </style>
+        <label>
 
-</head>
+            NPM
 
-<body>
+        </label>
 
-    <h2>Tambah Mahasiswa</h2>
+        <input
+            type="text"
+            name="npm"
+            class="form-control"
+            required>
 
-    <?php $this->flash(); ?>
+    </div>
 
-    <form
-        action="<?= BASEURL ?>/mahasiswa/store"
-        method="POST">
 
-        <label>NPM</label>
-        <input type="text" name="npm">
+    <div class="mb-3">
 
-        <label>Nama Lengkap</label>
-        <input type="text"
-            name="nama_lengkap">
+        <label>
 
-        <label>Fakultas</label>
-        <input type="text"
+            Nama Lengkap
+
+        </label>
+
+        <input
+            type="text"
+            name="nama_lengkap"
+            class="form-control"
+            required>
+
+    </div>
+
+
+    <div class="mb-3">
+
+        <label>
+
+            Fakultas
+
+        </label>
+
+        <input
+            type="text"
             name="fakultas"
-            value="FTI">
+            class="form-control"
+            value="FTI"
+            required>
 
-        <label>Jurusan</label>
+    </div>
 
-        <select name="jurusan">
+
+    <div class="mb-3">
+
+        <label>
+
+            Jurusan
+
+        </label>
+
+        <select
+            name="jurusan"
+            class="form-select">
 
             <option value="Teknik Informatika">
+
                 Teknik Informatika
+
             </option>
 
             <option value="Sistem Informasi">
+
                 Sistem Informasi
+
             </option>
 
         </select>
 
-        <label>Tempat Lahir</label>
+    </div>
+
+
+    <div class="mb-3">
+
+        <label>
+
+            Tempat Lahir
+
+        </label>
 
         <input
             type="text"
-            name="tempat_lahir">
+            name="tempat_lahir"
+            class="form-control"
+            required>
 
-        <label>Tanggal Lahir</label>
+    </div>
+
+
+    <div class="mb-3">
+
+        <label>
+
+            Tanggal Lahir
+
+        </label>
 
         <input
             type="date"
-            name="tanggal_lahir">
+            name="tanggal_lahir"
+            class="form-control"
+            required>
 
-        <label>Jenis Kelamin</label>
+    </div>
 
-        <input
-            type="radio"
-            name="jenis_kelamin"
-            value="Laki-laki"> Laki-laki
 
-        <input
-            type="radio"
-            name="jenis_kelamin"
-            value="Perempuan"> Perempuan
+    <div class="mb-3">
 
-        <br><br>
+        <label>
 
-        <button type="submit">
+            Jenis Kelamin
 
-            Simpan
+        </label>
 
-        </button>
 
-    </form>
+        <div class="form-check">
 
-</body>
+            <input
+                class="form-check-input"
+                type="radio"
+                name="jenis_kelamin"
+                value="Laki-laki">
 
-</html>
+            <label class="form-check-label">
+
+                Laki-laki
+
+            </label>
+
+        </div>
+
+
+        <div class="form-check">
+
+            <input
+                class="form-check-input"
+                type="radio"
+                name="jenis_kelamin"
+                value="Perempuan">
+
+            <label class="form-check-label">
+
+                Perempuan
+
+            </label>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="submit"
+        class="btn btn-primary">
+
+        Simpan
+
+    </button>
+
+    <a
+        href="<?= BASEURL ?>/mahasiswa"
+        class="btn btn-secondary">
+
+        Kembali
+
+    </a>
+
+</form>

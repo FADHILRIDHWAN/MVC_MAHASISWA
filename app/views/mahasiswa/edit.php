@@ -3,64 +3,70 @@
 /** @var array $mahasiswa */
 ?>
 
-<!DOCTYPE html>
+<h2 class="mb-4">
 
-<html>
+    Edit Mahasiswa
 
-<head>
+</h2>
 
-    <title>Edit Mahasiswa</title>
+<form
+    action="<?= BASEURL ?>/mahasiswa/update/<?= $mahasiswa['id'] ?>"
+    method="POST">
 
-    <style>
-        input,
-        select {
+    <input
+        type="hidden"
+        name="id"
+        value="<?= $mahasiswa['id'] ?>">
 
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <h2>Edit Mahasiswa</h2>
-
-    <form
-        action="<?= BASEURL ?>/mahasiswa/update/<?= $mahasiswa['id'] ?>"
-        method="POST">
-
-        <input
-            type="hidden"
-            name="id"
-            value="<?= $mahasiswa['id'] ?>">
+    <div class="mb-3">
 
         <label>NPM</label>
 
         <input
             type="text"
             name="npm"
-            value="<?= $mahasiswa['npm'] ?>">
+            class="form-control"
+            value="<?= $mahasiswa['npm'] ?>"
+            required>
+
+    </div>
+
+
+    <div class="mb-3">
 
         <label>Nama Lengkap</label>
 
         <input
             type="text"
             name="nama_lengkap"
-            value="<?= $mahasiswa['nama_lengkap'] ?>">
+            class="form-control"
+            value="<?= $mahasiswa['nama_lengkap'] ?>"
+            required>
+
+    </div>
+
+
+    <div class="mb-3">
 
         <label>Fakultas</label>
 
         <input
             type="text"
             name="fakultas"
-            value="<?= $mahasiswa['fakultas'] ?>">
+            class="form-control"
+            value="<?= $mahasiswa['fakultas'] ?>"
+            required>
+
+    </div>
+
+
+    <div class="mb-3">
 
         <label>Jurusan</label>
 
-        <select name="jurusan">
+        <select
+            name="jurusan"
+            class="form-select">
 
             <option
                 value="Teknik Informatika"
@@ -87,58 +93,100 @@
 
         </select>
 
+    </div>
+
+
+    <div class="mb-3">
 
         <label>Tempat Lahir</label>
 
         <input
             type="text"
             name="tempat_lahir"
-            value="<?= $mahasiswa['tempat_lahir'] ?>">
+            class="form-control"
+            value="<?= $mahasiswa['tempat_lahir'] ?>"
+            required>
 
+    </div>
+
+
+    <div class="mb-3">
 
         <label>Tanggal Lahir</label>
 
         <input
             type="date"
             name="tanggal_lahir"
-            value="<?= $mahasiswa['tanggal_lahir'] ?>">
+            class="form-control"
+            value="<?= $mahasiswa['tanggal_lahir'] ?>"
+            required>
 
+    </div>
+
+
+    <div class="mb-3">
 
         <label>Jenis Kelamin</label>
 
-        <input
-            type="radio"
-            name="jenis_kelamin"
-            value="Laki-laki"
+        <div class="form-check">
 
-            <?= ($mahasiswa['jenis_kelamin'] == "Laki-laki")
-                ? 'checked' : ''
-            ?>>
+            <input
+                class="form-check-input"
+                type="radio"
+                name="jenis_kelamin"
+                value="Laki-laki"
 
-        Laki-laki
+                <?= ($mahasiswa['jenis_kelamin'] == "Laki-laki")
+                    ? 'checked' : ''
+                ?>>
+
+            <label class="form-check-label">
+
+                Laki-laki
+
+            </label>
+
+        </div>
 
 
-        <input
-            type="radio"
-            name="jenis_kelamin"
-            value="Perempuan"
+        <div class="form-check">
 
-            <?= ($mahasiswa['jenis_kelamin'] == "Perempuan")
-                ? 'checked' : ''
-            ?>>
+            <input
+                class="form-check-input"
+                type="radio"
+                name="jenis_kelamin"
+                value="Perempuan"
 
-        Perempuan
+                <?= ($mahasiswa['jenis_kelamin'] == "Perempuan")
+                    ? 'checked' : ''
+                ?>>
 
-        <br><br>
+            <label class="form-check-label">
 
-        <button type="submit">
+                Perempuan
 
-            Update Data
+            </label>
 
-        </button>
+        </div>
 
-    </form>
+    </div>
 
-</body>
 
-</html>
+    <button
+        class="btn btn-warning"
+        type="submit">
+
+        Update
+
+    </button>
+
+
+    <a
+        href="<?= BASEURL ?>/mahasiswa"
+        class="btn btn-secondary">
+
+        Kembali
+
+    </a>
+
+</form>

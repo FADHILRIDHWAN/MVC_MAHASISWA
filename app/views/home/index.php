@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-    <title>Home MVC</title>
-
-</head>
-
-<body>
+<div class="text-center">
 
     <h1>
-        Selamat datang di Aplikasi MVC Mahasiswa.
-        Kelompok kami siap belajar!
+        Selamat Datang
     </h1>
 
-</body>
+    <p class="lead">
 
-</html>
+        Selamat datang di Aplikasi MVC Mahasiswa.
+        Kelompok kami siap belajar!
+
+    </p>
+
+</div>
