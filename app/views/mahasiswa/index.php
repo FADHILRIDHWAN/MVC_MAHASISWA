@@ -35,6 +35,80 @@
 
     <h2>Data Mahasiswa</h2>
 
+    <form method="GET">
+
+        <input
+            type="text"
+            name="search"
+
+            placeholder="Cari NPM / Nama"
+
+            value="<?= isset($search) ? $search : '' ?>">
+
+
+        <select name="jurusan">
+
+            <option value="">
+                Semua Jurusan
+            </option>
+
+
+            <option
+                value="Teknik Informatika"
+
+                <?= (
+                    isset($jurusan)
+                    &&
+                    $jurusan == "Teknik Informatika"
+                )
+
+                    ? 'selected' : ''
+                ?>>
+
+                Teknik Informatika
+
+            </option>
+
+
+            <option
+                value="Sistem Informasi"
+
+                <?= (
+                    isset($jurusan)
+                    &&
+                    $jurusan == "Sistem Informasi"
+                )
+
+                    ? 'selected' : ''
+                ?>>
+
+                Sistem Informasi
+
+            </option>
+
+        </select>
+
+
+        <button type="submit">
+
+            Cari
+
+        </button>
+
+
+        <a href="<?= BASEURL ?>/mahasiswa">
+
+            <button type="button">
+
+                Reset
+
+            </button>
+
+        </a>
+
+    </form>
+
+    <br>
     <a href="<?= BASEURL ?>/mahasiswa/create">
 
         <button>

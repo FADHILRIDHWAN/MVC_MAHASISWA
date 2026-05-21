@@ -118,4 +118,63 @@ VALUES
 
         ]);
     }
+
+    public function searchAndFilter(
+        $search = '',
+        $jurusan = ''
+    ) {
+
+        $query = "SELECT * FROM mahasiswa";
+
+        $conditions = [];
+
+        $params = [];
+
+        if (!empty($search)) {
+
+            $conditions[] = "(
+        npm LIKE :search
+        OR
+        nama_lengkap LIKE :search
+        )";
+
+            $params[':search']
+                = "%" . $search . "%";
+        }
+
+        if (!empty($jurusan)) {
+
+            $conditions[] =
+                "jurusan=:jurusan";
+
+            $params[':jurusan']
+                = $jurusan;
+        }
+
+        if (count($conditions) > 0) {
+
+            $query .=
+                " WHERE "
+                . implode(
+                    " AND ",
+                    $conditions
+                );
+        }
+
+        $query .=
+            " ORDER BY id DESC";
+
+        $stmt =
+            $this->db->prepare(
+                $query
+            );
+
+        $stmt->execute(
+            $params
+        );
+
+        return $stmt->fetchAll(
+            PDO::FETCH_ASSOC
+        );
+    }
 }
