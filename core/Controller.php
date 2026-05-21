@@ -18,4 +18,10 @@ class Controller
 
         return new $model;
     }
+
+    public function tanggalIndonesia($tanggal)
+    {
+
+        return date('d-m-Y', strtotime($tanggal));
+    }
 }
