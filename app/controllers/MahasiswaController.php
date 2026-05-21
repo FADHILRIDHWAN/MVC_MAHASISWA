@@ -184,4 +184,188 @@ class MahasiswaController extends Controller
 
         exit;
     }
+
+    public function exportCSV()
+    {
+
+        $mhs = $this->model('Mahasiswa');
+
+        $search = $_GET['search'] ?? '';
+
+        $jurusan = $_GET['jurusan'] ?? '';
+
+        if (!empty($search) || !empty($jurusan)) {
+
+            $data = $mhs->searchAndFilter(
+                $search,
+                $jurusan
+            );
+        } else {
+
+            $data = $mhs->getAll();
+        }
+
+        header(
+            'Content-Type:text/csv'
+        );
+
+        header(
+            'Content-Disposition:attachment; filename=mahasiswa.csv'
+        );
+
+        $output = fopen(
+            'php://output',
+            'w'
+        );
+
+        fputcsv($output, [
+
+            'ID',
+            'NPM',
+            'Nama Lengkap',
+            'Fakultas',
+            'Jurusan',
+            'Tempat Lahir',
+            'Tanggal Lahir',
+            'Jenis Kelamin',
+            'Status'
+
+        ]);
+
+        foreach ($data as $m) {
+
+            fputcsv($output, [
+
+                $m['id'],
+                $m['npm'],
+                $m['nama_lengkap'],
+                $m['fakultas'],
+                $m['jurusan'],
+                $m['tempat_lahir'],
+                $m['tanggal_lahir'],
+                $m['jenis_kelamin'],
+                $m['status_id'] == 1
+                    ?
+                    'Aktif'
+                    :
+                    'Nonaktif'
+
+            ]);
+        }
+
+        fclose($output);
+
+        exit;
+    }
+
+    public function exportPDF()
+    {
+
+        $mhs = $this->model(
+            'Mahasiswa'
+        );
+
+        $search =
+            $_GET['search']
+            ?? '';
+
+        $jurusan =
+            $_GET['jurusan']
+            ?? '';
+
+        if (
+            !empty($search)
+            ||
+            !empty($jurusan)
+        ) {
+
+            $data =
+                $mhs
+                ->searchAndFilter(
+                    $search,
+                    $jurusan
+                );
+        } else {
+
+            $data =
+                $mhs
+                ->getAll();
+        }
+
+        $html = '
+
+<h2 align="center">
+
+Data Mahasiswa
+
+</h2>
+
+<table
+border="1"
+width="100%"
+cellpadding="5"
+cellspacing="0"
+>
+
+<tr>
+
+<th>ID</th>
+<th>NPM</th>
+<th>Nama</th>
+<th>Jurusan</th>
+<th>Jenis Kelamin</th>
+
+</tr>
+
+';
+
+        foreach (
+            $data as $m
+        ) {
+
+            $html .= '
+
+<tr>
+
+<td>' . $m['id'] . '</td>
+
+<td>' . $m['npm'] . '</td>
+
+<td>' . $m['nama_lengkap'] . '</td>
+
+<td>' . $m['jurusan'] . '</td>
+
+<td>' . $m['jenis_kelamin'] . '</td>
+
+</tr>
+
+';
+        }
+
+        $html .= '</table>';
+
+        $dompdf =
+            new Dompdf\Dompdf();
+
+        $dompdf
+            ->loadHtml(
+                $html
+            );
+
+        $dompdf
+            ->setPaper(
+                'A4',
+                'landscape'
+            );
+
+        $dompdf
+            ->render();
+
+        $dompdf
+            ->stream(
+                'mahasiswa.pdf'
+            );
+
+        exit;
+    }
 }

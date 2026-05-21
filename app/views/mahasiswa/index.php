@@ -6,9 +6,28 @@
 
 <a
     href="<?= BASEURL ?>/mahasiswa/create"
-    class="btn btn-primary mb-3">
+    class="btn btn-primary mb-2">
 
     Tambah Mahasiswa
+
+</a>
+
+<a
+    href="<?= BASEURL ?>/mahasiswa/exportCSV?search=<?= isset($search) ? $search : '' ?>&jurusan=<?= isset($jurusan) ? $jurusan : '' ?>"
+
+    class="btn btn-success mb-2">
+
+    Export CSV
+
+</a>
+
+
+<a
+    href="<?= BASEURL ?>/mahasiswa/exportPDF?search=<?= isset($search) ? $search : '' ?>&jurusan=<?= isset($jurusan) ? $jurusan : '' ?>"
+
+    class="btn btn-danger mb-2">
+
+    Export PDF
 
 </a>
 
