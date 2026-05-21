@@ -58,6 +58,7 @@
             <th>Tanggal Lahir</th>
             <th>Jenis Kelamin</th>
             <th>Status</th>
+            <th>Aksi</th>
 
         </tr>
 
@@ -79,6 +80,27 @@
                     <td><?= date('d-m-Y', strtotime($m['tanggal_lahir'])) ?></td>
                     <td><?= $m['jenis_kelamin'] ?></td>
                     <td><?= ($m['status_id'] == 1) ? 'Aktif' : 'Nonaktif' ?></td>
+                    <td>
+
+                        <a href="<?= BASEURL ?>/mahasiswa/edit/<?= $m['id'] ?>">
+
+                            <button>Edit</button>
+
+                        </a>
+
+
+                        <a
+                            href="<?= BASEURL ?>/mahasiswa/delete/<?= $m['id'] ?>"
+
+                            onclick="return confirm(
+'Yakin ingin menghapus data?'
+)">
+
+                            <button>Delete</button>
+
+                        </a>
+
+                    </td>
 
                 </tr>
 
