@@ -74,4 +74,4 @@ http://localhost/mvc_mahasiswa/public
 
 ## Repository
 
-https://github.com/username/mvc_mahasiswa
+https://github.com/FADHILRIDHWAN/MVC_MAHASISWA
