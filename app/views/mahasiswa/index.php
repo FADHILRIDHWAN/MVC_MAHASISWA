@@ -35,6 +35,16 @@
 
     <h2>Data Mahasiswa</h2>
 
+    <a href="<?= BASEURL ?>/mahasiswa/create">
+
+        <button>
+            Tambah Mahasiswa
+        </button>
+
+    </a>
+
+    <?php $this->flash(); ?>
+
     <table>
 
         <tr>

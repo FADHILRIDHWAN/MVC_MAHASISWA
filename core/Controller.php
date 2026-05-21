@@ -19,9 +19,29 @@ class Controller
         return new $model;
     }
 
-    public function tanggalIndonesia($tanggal)
+    public function setFlash($message, $type)
     {
 
-        return date('d-m-Y', strtotime($tanggal));
+        $_SESSION['flash'] = [
+            'message' => $message,
+            'type' => $type
+        ];
+    }
+
+    public function flash()
+    {
+
+        if (isset($_SESSION['flash'])) {
+
+            echo "<div style='padding:10px;
+            margin:10px 0;
+            background:#ddd'>";
+
+            echo $_SESSION['flash']['message'];
+
+            echo "</div>";
+
+            unset($_SESSION['flash']);
+        }
     }
 }

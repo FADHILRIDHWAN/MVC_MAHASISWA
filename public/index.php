@@ -1,6 +1,11 @@
 <?php
 
-define('BASEURL', 'http://localhost/mvc_mahasiswa/public');
+session_start();
+
+define(
+    'BASEURL',
+    'http://localhost/mvc_mahasiswa/public'
+);
 
 require_once '../core/Controller.php';
 require_once '../core/Database.php';
