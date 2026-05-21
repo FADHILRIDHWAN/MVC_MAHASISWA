@@ -2,10 +2,8 @@
 
 ## Kelompok
 
-- Anggota 1 : Backend
-- Anggota 2 : Frontend
-- Anggota 3 : Dokumentasi
-
+- Anggota 1 : Muhammad Fadhil Ridhwan 2310010297
+- Anggota 2 : M. Ari Sulthan Sirajuddin 2310010272
 ## Arsitektur
 
 Aplikasi menggunakan pola MVC:
