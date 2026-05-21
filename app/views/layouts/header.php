@@ -35,6 +35,7 @@ $currentUrl = $_GET['url'] ?? '';
 
             <button
                 class="navbar-toggler"
+                type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#navbarNav">
 
@@ -47,43 +48,90 @@ $currentUrl = $_GET['url'] ?? '';
 
                 <ul class="navbar-nav ms-auto">
 
-                    <li class="nav-item">
+                    <?php if (isset($_SESSION['user'])): ?>
 
-                        <a
-                            class="nav-link <?= ($currentUrl == '' ? 'active' : '') ?>"
-                            href="<?= BASEURL ?>">
+                        <li class="nav-item">
 
-                            Home
+                            <a
+                                class="nav-link <?= ($currentUrl == '' ? 'active' : '') ?>"
+                                href="<?= BASEURL ?>">
 
-                        </a>
+                                Home
 
-                    </li>
+                            </a>
 
-
-                    <li class="nav-item">
-
-                        <a
-                            class="nav-link <?= strpos($currentUrl, 'mahasiswa') !== false ? 'active' : '' ?>"
-                            href="<?= BASEURL ?>/mahasiswa">
-
-                            Data Mahasiswa
-
-                        </a>
-
-                    </li>
+                        </li>
 
 
-                    <li class="nav-item">
+                        <li class="nav-item">
 
-                        <a
-                            class="nav-link"
-                            href="<?= BASEURL ?>/mahasiswa/create">
+                            <a
+                                class="nav-link <?= strpos($currentUrl, 'mahasiswa') !== false ? 'active' : '' ?>"
+                                href="<?= BASEURL ?>/mahasiswa">
 
-                            Tambah Mahasiswa
+                                Data Mahasiswa
 
-                        </a>
+                            </a>
 
-                    </li>
+                        </li>
+
+
+                        <?php if ($_SESSION['user']['role'] == 'admin'): ?>
+
+                            <li class="nav-item">
+
+                                <a
+                                    class="nav-link"
+                                    href="<?= BASEURL ?>/mahasiswa/create">
+
+                                    Tambah Mahasiswa
+
+                                </a>
+
+                            </li>
+
+                        <?php endif; ?>
+
+
+                        <li class="nav-item">
+
+                            <span class="nav-link">
+
+                                <?= $_SESSION['user']['username'] ?>
+                                (<?= $_SESSION['user']['role'] ?>)
+
+                            </span>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="<?= BASEURL ?>/auth/logout">
+
+                                Logout
+
+                            </a>
+
+                        </li>
+
+                    <?php else: ?>
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="<?= BASEURL ?>/auth/login">
+
+                                Login
+
+                            </a>
+
+                        </li>
+
+                    <?php endif; ?>
 
                 </ul>
 

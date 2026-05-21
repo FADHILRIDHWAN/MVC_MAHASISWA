@@ -67,6 +67,11 @@ http://localhost/mvc_mahasiswa/public
 ![Sesi 8](screenshots/sesi%2088.png)
 ![Sesi 8](screenshots/sesi%20888.png)
 
+## Tugas Akhir
+![Tugas Akhir](screenshots/login%201.png)
+![Tugas Akhir](screenshots/login%202.png)
+![TUgas Akhir](screenshots/login%203.png)
+
 ## Repository
 
 https://github.com/username/mvc_mahasiswa

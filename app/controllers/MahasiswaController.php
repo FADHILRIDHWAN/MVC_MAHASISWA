@@ -40,6 +40,7 @@ class MahasiswaController extends Controller
 
     public function create()
     {
+        $this->adminOnly();
 
         $this->view(
             'mahasiswa/create'
@@ -48,6 +49,8 @@ class MahasiswaController extends Controller
 
     public function store()
     {
+        $this->adminOnly();
+
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -101,6 +104,7 @@ class MahasiswaController extends Controller
 
     public function edit($id)
     {
+        $this->adminOnly();
 
         $mhs = $this->model('Mahasiswa');
 
@@ -129,6 +133,7 @@ class MahasiswaController extends Controller
 
     public function update($id)
     {
+        $this->adminOnly();
 
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
@@ -168,6 +173,8 @@ class MahasiswaController extends Controller
 
     public function delete($id)
     {
+
+        $this->adminOnly();
 
         $mhs = $this->model('Mahasiswa');
 
@@ -367,5 +374,52 @@ cellspacing="0"
             );
 
         exit;
+    }
+
+    public function __construct()
+    {
+
+        if (
+            !isset(
+                $_SESSION['user']
+            )
+        ) {
+
+            header(
+                "Location:"
+                    . BASEURL .
+                    "/auth/login"
+            );
+
+            exit;
+        }
+    }
+
+    private function adminOnly()
+    {
+
+        if (
+
+            $_SESSION['user']['role']
+            != 'admin'
+
+        ) {
+
+            $this->setFlash(
+
+                "Akses ditolak",
+
+                "danger"
+
+            );
+
+            header(
+                "Location:"
+                    . BASEURL .
+                    "/mahasiswa"
+            );
+
+            exit;
+        }
     }
 }

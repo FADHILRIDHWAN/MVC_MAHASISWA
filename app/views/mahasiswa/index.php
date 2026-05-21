@@ -4,13 +4,17 @@
 
 <?php $this->flash(); ?>
 
-<a
-    href="<?= BASEURL ?>/mahasiswa/create"
-    class="btn btn-primary mb-2">
+<?php if ($_SESSION['user']['role'] == 'admin'): ?>
 
-    Tambah Mahasiswa
+    <a
+        href="<?= BASEURL ?>/mahasiswa/create"
+        class="btn btn-primary mb-3">
 
-</a>
+        Tambah Mahasiswa
+
+    </a>
+
+<?php endif; ?>
 
 <a
     href="<?= BASEURL ?>/mahasiswa/exportCSV?search=<?= isset($search) ? $search : '' ?>&jurusan=<?= isset($jurusan) ? $jurusan : '' ?>"
@@ -193,27 +197,30 @@
 
                         <td>
 
-                            <a
-                                href="<?= BASEURL ?>/mahasiswa/edit/<?= $m['id'] ?>"
-                                class="btn btn-warning btn-sm">
+                            <?php if ($_SESSION['user']['role'] == 'admin'): ?>
 
-                                Edit
+                                <a
+                                    href="<?= BASEURL ?>/mahasiswa/edit/<?= $m['id'] ?>"
+                                    class="btn btn-warning btn-sm">
 
-                            </a>
+                                    Edit
+
+                                </a>
 
 
-                            <a
-                                href="<?= BASEURL ?>/mahasiswa/delete/<?= $m['id'] ?>"
+                                <a
+                                    href="<?= BASEURL ?>/mahasiswa/delete/<?= $m['id'] ?>"
+                                    class="btn btn-danger btn-sm"
 
-                                class="btn btn-danger btn-sm"
-
-                                onclick="return confirm(
+                                    onclick="return confirm(
 'Yakin ingin menghapus data?'
 )">
 
-                                Delete
+                                    Delete
 
-                            </a>
+                                </a>
+
+                            <?php endif; ?>
 
                         </td>
 
